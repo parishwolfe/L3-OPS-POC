@@ -1,0 +1,17 @@
+steps:
+  # Deploy Cloud Function
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - functions
+      - deploy
+      - l3-options-trading
+      - --gen2
+      - --runtime=python311
+      - --region=us-central1
+      - --source=.
+      - --entry-point=trading_handler
+      - --trigger-http
+      - --allow-unauthenticated
+      - --set-env-vars=ALPACA_PAPER=true
+      - --timeout=540s
+      - --memory=512MB
